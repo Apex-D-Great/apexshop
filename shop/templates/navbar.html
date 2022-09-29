@@ -1,0 +1,89 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="{{ url_for('adminhome') }}">Admin</a>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          {% if current_user.is_authenticated %}
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">User Profile</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('addproduct') }}">Add_Product</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('brand') }}">Add Brand</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('category') }}">Add Category</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Brands
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for brand in brands %}
+              <a class="dropdown-item" href="{{url_for('get_brand', id=brand.id)}}">{{brand.name}}</a>
+              {% endfor %}
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Categories
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for category in categories %}
+              <a class="dropdown-item" href="{{url_for('get_category',id=category.id)}}">{{category.name}}</a>
+              {% endfor %}
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url_for('getCart') }}" class="nav-link"> Cart ({{ session['Shoppingcart']|length }}) </a>
+          </li>
+          {% else %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Brands
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for brand in brands %}
+              <a class="dropdown-item" href="{{url_for('get_brand', id=brand.id)}}">{{brand.name}}</a>
+              {% endfor %}
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Categories
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {% for category in categories %}
+              <a class="dropdown-item" href="{{url_for('get_category',id=category.id)}}">{{category.name}}</a>
+              {% endfor %}
+            </div>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('customerLogin') }}">Cust Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('customer_register') }}">Cust Register</a>
+          </li>
+          {% endif %}
+        </ul>
+        <form class="d-flex ml-5" method="POST" action="{{ url_for('search') }}" }}>
+          {{ form.hidden_tag() }}
+          <input class="form-control me-2" type="search" name="searched" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <table class="table table-sm table-stripped">
+            <thead>
+                <th>Sn</th>
+                <th>Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </thead>
+            <tbody>
+                {% if brand %}
+                <br>
+                {% for brnd in brand %}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{brnd.name}}</td>
+                    <td><a href="{{ url_for('brand_update', id=brnd.id) }}" class="btn btn-sm btn-outline-info">Edit</a></td>
+                    <td><a href="{{ url_for('brand_delete', id=brnd.id) }}" class="btn btn-sm btn-outline-danger">Delete</a></td>
+                </tr>
+                {% endfor %}
+                <a href="{{ url_for('addbrand') }}" class="btn btn-sm btn-secondary">ADD</a>
+                {% else %}
+                {% for cat in category %}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{cat.name}}</td>
+                    <td><a href="{{ url_for('category_update', id=cat.id) }}" class="btn btn-sm btn-outline-info">Edit</a></td>
+                    <td><a href="{{ url_for('category_delete', id=cat.id) }}" class="btn btn-sm btn-outline-danger">Delete</a></td>
+                </tr>
+                {% endfor %}
+                <a href="{{ url_for('addcategory') }}" class="btn btn-sm btn-secondary">ADD</a>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
